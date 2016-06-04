@@ -5,13 +5,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Calendar;
-
 import au.com.equicord.factory.ConnectionFactory;
 import au.com.equicord.model.Contact;
 
 /**
- * Class responsible for having all database methods
+ * Class responsible for having all database methods from ContactTable
  * 
  * @author Gustavo <gustavotavaresdias@gmail.com>
  */
@@ -41,7 +39,9 @@ public class ContactDAO extends ConnectionFactory {
 		listContacts = new ArrayList<Contact>();
 
 		try {
-			pstmt = conn.prepareStatement("SELECT * FROM contactTable");
+			pstmt = conn.prepareStatement("SELECT * FROM contactTable "
+					+ "INNER JOIN categoryTable "
+					+ "ON contactTable.CategoryID = categoryTable.categoryID");
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -55,6 +55,8 @@ public class ContactDAO extends ConnectionFactory {
 				contact.setEmail(rs.getString("cEmail"));
 				contact.setPrivate(rs.getBoolean("clsPrivate"));
 				contact.setCategoryId(rs.getInt("CategoryID"));
+				contact.setCategoryType(rs.getString("cType"));
+				contact.setCategoryDescription(rs.getString("cTypeDesc"));
 				contact.setPeriodId(rs.getInt("pPeriodID"));
 				contact.setStart(rs.getDate("pStart"));
 				contact.setEnd(rs.getDate("pEnd"));
@@ -175,7 +177,6 @@ public class ContactDAO extends ConnectionFactory {
 		conn = createConnection();
 		try {
 			pstmt = conn.prepareStatement("DELETE FROM contactTable WHERE cID = ?");
-
 			pstmt.setInt(1, idContact);			
 			pstmt.executeUpdate();
 			

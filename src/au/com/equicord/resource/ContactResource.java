@@ -24,8 +24,9 @@ public class ContactResource {
 	private static final String FAILURE_RESULT = "failure";
 
 	/**
+	 * Method responsible for GET all categories in a Json format.
 	 * 
-	 * @return
+	 * @return ArrayList<Category> - List of Categories
 	 */
 	@GET
 	@Path("/getContacts")
@@ -34,6 +35,13 @@ public class ContactResource {
 		return new ContactController().getContacts();
 	}
 
+	
+	/**
+	 * Method responsible for POST a contact object.
+	 *
+	 * @param contact object
+	 * @return String - (Success or Failure)
+	 */
 	@POST
 	@Path("/addContact")
 	@Produces("application/json")
@@ -48,6 +56,12 @@ public class ContactResource {
 		return FAILURE_RESULT;
 	}
 
+	/**
+	 * Method responsible for PUT a contact object.
+	 *
+	 * @param contact object
+	 * @return String - (Success or Failure)
+	 */
 	@PUT
 	@Path("/updateContact")
 	@Produces("application/json")
@@ -62,6 +76,12 @@ public class ContactResource {
 		return FAILURE_RESULT;
 	}
 	
+	/**
+	 * Method responsible for DELETE a contact object.
+	 *
+	 * @param int - Id of contact
+	 * @return String - (Success or Failure)
+	 */
 	@DELETE
 	@Path("deleteContact/{id}")
 	@Produces("application/json")

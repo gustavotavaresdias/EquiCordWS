@@ -1,8 +1,4 @@
 package au.com.equicord.model;
-
-
-
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -23,6 +19,8 @@ public class Contact {
 	private String email;
 	private boolean isPrivate;
 	private int categoryId;
+	private String categoryType;
+	private String categoryDescription;
 	private int periodId;
 	private Date start;
 	private Date end;
@@ -30,7 +28,7 @@ public class Contact {
 	private int searchId;
 	private String googleId;
 	private boolean paypal;
-
+	
 	public int getId() {
 		return id;
 	}
@@ -95,6 +93,22 @@ public class Contact {
 		this.categoryId = categoryId;
 	}
 
+	public String getCategoryType() {
+		return categoryType;
+	}
+
+	public void setCategoryType(String categoryType) {
+		this.categoryType = categoryType;
+	}
+
+	public String getCategoryDescription() {
+		return categoryDescription;
+	}
+
+	public void setCategoryDescription(String categoryDescription) {
+		this.categoryDescription = categoryDescription;
+	}
+	
 	public int getPeriodId() {
 		return periodId;
 	}
