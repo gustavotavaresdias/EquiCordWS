@@ -24,9 +24,9 @@ public class ContactResource {
 	private static final String FAILURE_RESULT = "failure";
 
 	/**
-	 * Method responsible for GET all categories in a Json format.
+	 * Method responsible for GET all contacts in a Json format.
 	 * 
-	 * @return ArrayList<Category> - List of Categories
+	 * @return ArrayList<Category> - List of contacts
 	 */
 	@GET
 	@Path("/getContacts")

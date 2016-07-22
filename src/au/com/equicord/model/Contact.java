@@ -1,4 +1,5 @@
 package au.com.equicord.model;
+
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -28,7 +29,7 @@ public class Contact {
 	private int searchId;
 	private String googleId;
 	private boolean paypal;
-	
+
 	public int getId() {
 		return id;
 	}
@@ -108,7 +109,7 @@ public class Contact {
 	public void setCategoryDescription(String categoryDescription) {
 		this.categoryDescription = categoryDescription;
 	}
-	
+
 	public int getPeriodId() {
 		return periodId;
 	}
@@ -167,10 +168,13 @@ public class Contact {
 
 	@Override
 	public String toString() {
-		return "Contact [id=" + id + ", name=" + name + ", phone=" + phone + ", address=" + address + ", postcode="
-				+ postcode + ", email=" + email + ", isPrivate=" + isPrivate + ", categoryId=" + categoryId
-				+ ", periodId=" + periodId + ", start=" + start + ", end=" + end + ", price=" + price + ", searchId="
-				+ searchId + ", googleId=" + googleId + ", paypal=" + paypal + "]";
+		return "Contact [id=" + id + ", name=" + name + ", phone=" + phone
+				+ ", address=" + address + ", postcode=" + postcode
+				+ ", email=" + email + ", isPrivate=" + isPrivate
+				+ ", categoryId=" + categoryId + ", periodId=" + periodId
+				+ ", start=" + start + ", end=" + end + ", price=" + price
+				+ ", searchId=" + searchId + ", googleId=" + googleId
+				+ ", paypal=" + paypal + "]";
 	}
 
 	@Override
@@ -181,7 +185,8 @@ public class Contact {
 		result = prime * result + categoryId;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((end == null) ? 0 : end.hashCode());
-		result = prime * result + ((googleId == null) ? 0 : googleId.hashCode());
+		result = prime * result
+				+ ((googleId == null) ? 0 : googleId.hashCode());
 		result = prime * result + id;
 		result = prime * result + (isPrivate ? 1231 : 1237);
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -245,7 +250,8 @@ public class Contact {
 			return false;
 		if (postcode != other.postcode)
 			return false;
-		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
+		if (Double.doubleToLongBits(price) != Double
+				.doubleToLongBits(other.price))
 			return false;
 		if (searchId != other.searchId)
 			return false;

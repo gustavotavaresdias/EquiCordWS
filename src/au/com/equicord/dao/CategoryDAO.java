@@ -29,7 +29,7 @@ public class CategoryDAO extends ConnectionFactory{
 	 * 
 	 * @return ArrayList<Category> - List of Categories
 	 */
-	public ArrayList<Category> getCategory() {
+	public ArrayList<Category> getCategories() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
