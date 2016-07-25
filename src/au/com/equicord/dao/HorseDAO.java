@@ -40,8 +40,7 @@ public class HorseDAO extends ConnectionFactory{
 		horseList = new ArrayList<Horse>();
 
 		try {
-			pstmt = conn.prepareStatement("SELECT * FROM horseTable "
-					+ "INNER JOIN eventType ON eventsTable.eTypeID = eventType.eTypeID");
+			pstmt = conn.prepareStatement("SELECT * FROM horseTable ");
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {

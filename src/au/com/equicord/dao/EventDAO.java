@@ -49,7 +49,7 @@ public class EventDAO extends ConnectionFactory{
 
 				event.seteID(rs.getInt("eID"));
 				event.seteName(rs.getString("eName"));
-				event.seteAddress(rs.getString("eAddress"));
+				event.seteAddress(rs.getString("aAddress"));
 				event.setePostcode(rs.getInt("ePostcode"));
 				event.seteWeb(rs.getString("eWeb"));
 				event.setePhone(rs.getInt("ePhone"));
@@ -91,7 +91,7 @@ public class EventDAO extends ConnectionFactory{
 
 		conn = createConnection();
 		try {
-			pstmt = conn.prepareStatement("INSERT INTO eventsTable VALUES (null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			pstmt = conn.prepareStatement("INSERT INTO eventsTable VALUES (null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
 			pstmt.setString(1, event.geteName());
 			pstmt.setString(2, event.geteAddress());
@@ -105,11 +105,10 @@ public class EventDAO extends ConnectionFactory{
 			pstmt.setString(10, event.getEcEmail());
 			pstmt.setBoolean(11, event.isElsPrivate());			
 			pstmt.setInt(12, event.geteTypeID());
-			pstmt.setString(13, event.geteType());
-			pstmt.setDate(14, new Date(event.geteDate().getTime()));
-			pstmt.setInt(15, event.getePeriod());
-			pstmt.setInt(16, event.geteTime());
-			pstmt.setString(17, event.geteGoogleID());
+			pstmt.setDate(13, new Date(event.geteDate().getTime()));
+			pstmt.setInt(14, event.getePeriod());
+			pstmt.setInt(15, event.geteTime());
+			pstmt.setString(16, event.geteGoogleID());
 			
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -136,8 +135,8 @@ public class EventDAO extends ConnectionFactory{
 		conn = createConnection();
 		try {
 			pstmt = conn.prepareStatement("UPDATE eventsTable SET eName = ?, "
-					+ "eAddress = ?, ePostcode = ?, eWeb = ?, ePhone = ?, eMail = ?, ecName = ?, ecAddress = ?, ecPhone = ?, ecEmail = ?"
-					+ "elsPrivate = ?, eTypeID = ?, eDate = ?, ePeriod = ?, eTime = ?, eGoogleID = ?"
+					+ "aAddress = ?, ePostcode = ?, eWeb = ?, ePhone = ?, eMail = ?, ecName = ?, ecAddress = ?, ecPhone = ?, ecEmail = ?, "
+					+ "elsPrivate = ?, eTypeID = ?, eDate = ?, ePeriod = ?, eTime = ?, eGoogleID = ? "
 					+ "WHERE eID = ?");
 
 			pstmt.setString(1, event.geteName());
