@@ -18,6 +18,7 @@ public class User {
 	private int uPostcode;
 	private int uPasscode;
 	private String uGoogleID;
+	private String uPassword;
 
 	public int getuID() {
 		return uID;
@@ -81,6 +82,14 @@ public class User {
 
 	public void setuGoogleID(String uGoogleID) {
 		this.uGoogleID = uGoogleID;
+	}
+	
+	public String getuPassword() {
+		return uPassword;
+	}
+
+	public void setuPassword(String uPassword) {
+		this.uPassword = uPassword;
 	}
 
 }

@@ -49,6 +49,7 @@ public class HorseDAO extends ConnectionFactory{
 				horse.sethID(rs.getInt("hID"));
 				horse.sethName(rs.getString("hName"));
 				horse.sethNickname(rs.getString("hNickname"));
+				horse.sethDame(rs.getString("hDame"));
 				horse.sethSire(rs.getString("hSire"));
 				horse.sethBreed(rs.getString("hBreed"));
 				horse.sethColour(rs.getString("hColour"));
@@ -126,8 +127,8 @@ public class HorseDAO extends ConnectionFactory{
 		conn = createConnection();
 		try {
 			pstmt = conn.prepareStatement("UPDATE horseTable SET hName = ?, "
-					+ "hNickname = ?, hDame = ?, hSire = ?, hBreed = ?, hColour = ?, hDOB = ?, hSex = ?, hHeight = ?, hMarksScars = ?"
-					+ "hPicture = ?, hMicrochip = ?, hDietary = ?"
+					+ "hNickname = ?, hDame = ?, hSire = ?, hBreed = ?, hColour = ?, hDOB = ?, hSex = ?, hHeight = ?, hMarksScars = ?, "
+					+ "hPicture = ?, hMicrochip = ?, hDietary = ? "
 					+ "WHERE hID = ?");
 
 			pstmt.setString(1, horse.gethName());

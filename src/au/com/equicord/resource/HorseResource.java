@@ -1,6 +1,7 @@
 package au.com.equicord.resource;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -32,10 +33,11 @@ public class HorseResource {
 	@Path("/getHorses")
 	@Produces("application/json")
 	public ArrayList<Horse> getHorses() {
-		return new HorseController().getHorses();
+		ArrayList<Horse> result = new ArrayList<Horse>();
+		result = new HorseController().getHorses();
+		return result;
 	}
 
-	
 	/**
 	 * Method responsible for POST a horse object.
 	 *

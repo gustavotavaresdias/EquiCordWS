@@ -11,7 +11,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import au.com.equicord.controller.ContactController;
+import au.com.equicord.controller.HorseController;
 import au.com.equicord.model.Contact;
+import au.com.equicord.model.Horse;
 
 /**
  * Class responsible for having the web service's access methods for contact.
@@ -32,7 +34,9 @@ public class ContactResource {
 	@Path("/getContacts")
 	@Produces("application/json")
 	public ArrayList<Contact> getContacts() {
-		return new ContactController().getContacts();
+		ArrayList<Contact> result = new ArrayList<Contact>();
+		result = new ContactController().getContacts();
+		return result;
 	}
 
 	

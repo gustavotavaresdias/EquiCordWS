@@ -10,7 +10,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+import au.com.equicord.controller.ContactController;
 import au.com.equicord.controller.EventController;
+import au.com.equicord.model.Contact;
 import au.com.equicord.model.Event;
 
 /**
@@ -32,7 +34,9 @@ public class EventResource {
 	@Path("/getEvents")
 	@Produces("application/json")
 	public ArrayList<Event> getEvents() {
-		return new EventController().getEvents();
+		ArrayList<Event> result = new ArrayList<Event>();
+		result = new EventController().getEvents();
+		return result;
 	}
 
 	

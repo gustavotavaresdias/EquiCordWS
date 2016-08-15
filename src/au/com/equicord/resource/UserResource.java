@@ -9,8 +9,11 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
+import au.com.equicord.controller.EventTypeController;
 import au.com.equicord.controller.UserController;
+import au.com.equicord.model.EventType;
 import au.com.equicord.model.User;
 
 /**
@@ -32,7 +35,9 @@ public class UserResource {
 	@Path("/getUsers")
 	@Produces("application/json")
 	public ArrayList<User> getUsers() {
-		return new UserController().getUsers();
+		ArrayList<User> result = new ArrayList<User>();
+		result = new UserController().getUsers();
+		return result;
 	}
 
 	/**
@@ -52,20 +57,16 @@ public class UserResource {
 	 * Method responsible for POST a user object.
 	 *
 	 * @param user object
-	 * @return String - (Success or Failure)
+	 * @return new User ID - user Id
 	 */
 	@POST
 	@Path("/addUser")
 	@Produces("application/json")
 	public String addUser(User user) {
-		boolean result;
+		String result;
 
-		result = new UserController().addUser(user);
-
-		if (result) {
-			return SUCCESS_RESULT;
-		}
-		return FAILURE_RESULT;
+		result = String.valueOf(new UserController().addUser(user));		
+		return result;
 	}
 
 	/**

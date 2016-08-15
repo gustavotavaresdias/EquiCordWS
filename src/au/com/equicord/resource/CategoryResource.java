@@ -7,7 +7,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 import au.com.equicord.controller.CategoryController;
+import au.com.equicord.controller.HorseController;
 import au.com.equicord.model.Category;
+import au.com.equicord.model.Horse;
 
 /**
  * Class responsible for having the web service's access methods for Category.
@@ -16,8 +18,6 @@ import au.com.equicord.model.Category;
  */
 @Path("/category")
 public class CategoryResource {
-	private static final String SUCCESS_RESULT = "success";
-	private static final String FAILURE_RESULT = "failure";
 
 	/**
 	 * Method responsible to GET all categories registers in a Json format.
@@ -28,7 +28,9 @@ public class CategoryResource {
 	@Path("/getCategories")
 	@Produces("application/json")
 	public ArrayList<Category> getCategories() {
-		return new CategoryController().getCategories();
+		ArrayList<Category> result = new ArrayList<Category>();
+		result = new CategoryController().getCategories();
+		return result;
 	}
 
 	

@@ -21,7 +21,7 @@ public class UserController {
 		return UserDAO.getIntance().getUserById(idUser);
 	}
 	
-	public boolean addUser(User user) {
+	public int addUser(User user) {
 		return UserDAO.getIntance().addUser(user);
 	}
 

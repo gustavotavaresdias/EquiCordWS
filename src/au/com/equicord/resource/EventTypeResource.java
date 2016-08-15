@@ -6,7 +6,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import au.com.equicord.controller.EventController;
 import au.com.equicord.controller.EventTypeController;
+import au.com.equicord.model.Event;
 import au.com.equicord.model.EventType;
 
 /**
@@ -28,7 +30,9 @@ public class EventTypeResource {
 	@Path("/getEventTypes")
 	@Produces("application/json")
 	public ArrayList<EventType> getEventTypes() {
-		return new EventTypeController().getEventTypes();
+		ArrayList<EventType> result = new ArrayList<EventType>();
+		result = new EventTypeController().getEventTypes();
+		return result;
 	}
 
 	
