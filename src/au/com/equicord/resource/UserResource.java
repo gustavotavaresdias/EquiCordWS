@@ -1,5 +1,6 @@
 package au.com.equicord.resource;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.ws.rs.DELETE;
@@ -49,8 +50,24 @@ public class UserResource {
 	@GET
 	@Path("/getUser/{id}")
 	@Produces("application/json")
-	public User GetUserByID(@PathParam("id") int idUser) {
+	public User GetUserByID(@PathParam("id") int idUser) throws SQLException {
 		return new UserController().getUserByID(idUser);
+	}
+	
+	/**
+	 * Method responsible for GET a user by Email.
+	 *
+	 * @param String - User email
+	 * @return User
+	 * @throws SQLException 
+	 */
+	@GET
+	@Path("/getUserByEmail/{email}")
+	@Produces("application/json")
+	public User GetUserByEmail(@PathParam("email")String email) throws SQLException {
+		User resultUser = new User();
+		resultUser = new UserController().getUserByEmail(email);
+		return resultUser;
 	}
 	
 	/**

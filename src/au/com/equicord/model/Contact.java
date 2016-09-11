@@ -29,6 +29,12 @@ public class Contact {
 	private int searchId;
 	private String googleId;
 	private boolean paypal;
+	private int cSNumber;
+	private String cSName;
+	private String cSuburb;
+	private String cState;
+	private String cCountry;
+	private String cPicture;
 
 	public int getId() {
 		return id;
@@ -164,6 +170,54 @@ public class Contact {
 
 	public void setPaypal(boolean paypal) {
 		this.paypal = paypal;
+	}
+
+	public int getcSNumber() {
+		return cSNumber;
+	}
+
+	public void setcSNumber(int cSNumber) {
+		this.cSNumber = cSNumber;
+	}
+
+	public String getcSName() {
+		return cSName;
+	}
+
+	public void setcSName(String cSName) {
+		this.cSName = cSName;
+	}
+
+	public String getcSuburb() {
+		return cSuburb;
+	}
+
+	public void setcSuburb(String cSuburb) {
+		this.cSuburb = cSuburb;
+	}
+
+	public String getcState() {
+		return cState;
+	}
+
+	public void setcState(String cState) {
+		this.cState = cState;
+	}
+
+	public String getcCountry() {
+		return cCountry;
+	}
+
+	public void setcCountry(String cCountry) {
+		this.cCountry = cCountry;
+	}
+
+	public String getcPicture() {
+		return cPicture;
+	}
+
+	public void setcPicture(String cPicture) {
+		this.cPicture = cPicture;
 	}
 
 	@Override

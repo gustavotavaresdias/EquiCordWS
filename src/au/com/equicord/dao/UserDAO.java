@@ -3,6 +3,7 @@ package au.com.equicord.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import au.com.equicord.factory.ConnectionFactory;
@@ -73,45 +74,68 @@ public class UserDAO extends ConnectionFactory{
 	 * @param userID - User ID
 	 * @return User - User
 	 */
-	public User getUserById(int userID) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		ArrayList<User> userList = null;
+	public User getUserById(int userID) throws SQLException {
+		User user = null;
 
-		conn = createConnection();
-		userList = new ArrayList<User>();
+		try (
+				Connection conn = createConnection();
+				PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM userTable where uID = ? Limit 1");
+			){
 
-		try {
-			pstmt = conn.prepareStatement("SELECT * FROM userTable where uID = ?");
 			pstmt.setInt(1, userID);
-			rs = pstmt.executeQuery();
 
-			while (rs.next()) {
-				User user = new User();
-
-				user.setuID(rs.getInt("uID"));
-				user.setuName(rs.getString("uName"));
-				user.setuPhone(rs.getInt("uPhone"));
-				user.setuAddress(rs.getString("uAddress"));
-				user.setuPostcode(rs.getInt("uPostcode"));
-				user.setuEmail(rs.getString("uEmail"));
-				user.setuPasscode(rs.getInt("uPasscode"));
-				user.setuGoogleID(rs.getString("uGoogleID"));
-				user.setuPassword(rs.getString("uPassword"));
-				
-				userList.add(user);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					user = new User();
+					user.setuID(rs.getInt("uID"));
+					user.setuName(rs.getString("uName"));
+					user.setuPhone(rs.getInt("uPhone"));
+					user.setuAddress(rs.getString("uAddress"));
+					user.setuPostcode(rs.getInt("uPostcode"));
+					user.setuEmail(rs.getString("uEmail"));
+					user.setuPasscode(rs.getInt("uPasscode"));
+					user.setuGoogleID(rs.getString("uGoogleID"));
+					user.setuPassword(rs.getString("uPassword"));
+				}
 			}
-		} catch (Exception e) {
-			System.out.println("Error when select USER by ID:" + e);
-			e.printStackTrace();
-		} finally {
-			closeConnection(conn, pstmt, rs);
 		}
-
-		return userList.get(0);
+		return user;
 	}
 
+	/**
+	 * Method responsible for getting an user by Email from DB
+	 * 
+	 * @param eamil - User email
+	 * @return User - User
+	 */	
+	public User getUserByEmail(String email) throws SQLException {
+		User user = null;
+
+		try (
+				Connection conn = createConnection();
+				PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM userTable where uEmail = ? Limit 1");
+			){
+
+			pstmt.setString(1, email);
+
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					user = new User();
+					user.setuID(rs.getInt("uID"));
+					user.setuName(rs.getString("uName"));
+					user.setuPhone(rs.getInt("uPhone"));
+					user.setuAddress(rs.getString("uAddress"));
+					user.setuPostcode(rs.getInt("uPostcode"));
+					user.setuEmail(rs.getString("uEmail"));
+					user.setuPasscode(rs.getInt("uPasscode"));
+					user.setuGoogleID(rs.getString("uGoogleID"));
+					user.setuPassword(rs.getString("uPassword"));
+				}
+			}
+		}
+		return user;
+	}
+	
 	/**
 	 * Method responsible for add object User into the database
 	 * 
@@ -122,12 +146,14 @@ public class UserDAO extends ConnectionFactory{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "INSERT INTO userTable VALUES (null,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO userTable VALUES (null,?,?,?,?,?,?,?,?,?,?,?,?)";
 		int returnId = -1;
 
 		conn = createConnection();
 		try {
 			pstmt = conn.prepareStatement(sql, pstmt.RETURN_GENERATED_KEYS);
+			//INSERT INTO `userTable`(`uID`, `uName`, `uPhone`, `uAddress`, `uEmail`, `uPostcode`, `uPasscode`,
+			//		`uGoogleID`, `uPassword`, `uStreet`, `uSuburb`, `uTown`, `uCountry`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12],[value-13])
 			
 			pstmt.setString(1, user.getuName());
 			pstmt.setInt(2, user.getuPhone());
@@ -137,6 +163,10 @@ public class UserDAO extends ConnectionFactory{
 			pstmt.setInt(6, user.getuPasscode());
 			pstmt.setString(7, user.getuGoogleID());
 			pstmt.setString(8, user.getuPassword());
+			pstmt.setString(9, user.getuStreet());
+			pstmt.setString(10, user.getuSuburb());
+			pstmt.setString(11, user.getuTown());
+			pstmt.setString(12, user.getuCountry());
 			
 			pstmt.executeUpdate();
 			rs = pstmt.getGeneratedKeys();

@@ -28,7 +28,7 @@ public class Event {
 	private String eType;
 	private Date eDate;
 	private int ePeriod;
-	private int eTime;
+	private Date eTime;
 	private String eGoogleID;
 
 	public int geteID() {
@@ -159,11 +159,11 @@ public class Event {
 		this.ePeriod = ePeriod;
 	}
 
-	public int geteTime() {
+	public Date geteTime() {
 		return eTime;
 	}
 
-	public void seteTime(int eTime) {
+	public void seteTime(Date eTime) {
 		this.eTime = eTime;
 	}
 

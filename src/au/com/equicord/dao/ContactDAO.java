@@ -64,6 +64,12 @@ public class ContactDAO extends ConnectionFactory {
 				contact.setSearchId(rs.getInt("SearchID"));
 				contact.setGoogleId(rs.getString("GoogleID"));
 				contact.setPaypal(rs.getBoolean("payPal"));
+				contact.setcSNumber(rs.getInt("cSNumber"));
+				contact.setcSName(rs.getString("cSName"));
+				contact.setcSuburb(rs.getString("cSuburb"));
+				contact.setcState(rs.getString("cState"));
+				contact.setcCountry(rs.getString("cCountry"));
+				contact.setcPicture(rs.getString("cPicture"));
 
 				listContacts.add(contact);
 			}
@@ -90,7 +96,7 @@ public class ContactDAO extends ConnectionFactory {
 
 		conn = createConnection();
 		try {
-			pstmt = conn.prepareStatement("INSERT INTO contactTable VALUES (null,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			pstmt = conn.prepareStatement("INSERT INTO contactTable VALUES (null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
 			pstmt.setString(1, contact.getName());
 			pstmt.setInt(2, contact.getPhone());
@@ -106,6 +112,12 @@ public class ContactDAO extends ConnectionFactory {
 			pstmt.setInt(12, contact.getSearchId());
 			pstmt.setString(13, contact.getGoogleId());
 			pstmt.setBoolean(14, contact.isPaypal());
+			pstmt.setInt(15, contact.getcSNumber());
+			pstmt.setString(16, contact.getcSName());
+			pstmt.setString(17, contact.getcSuburb());
+			pstmt.setString(18, contact.getcState());
+			pstmt.setString(19, contact.getcCountry());
+			pstmt.setString(20, contact.getcPicture());
 			
 			pstmt.executeUpdate();
 		} catch (Exception e) {

@@ -63,7 +63,7 @@ public class EventDAO extends ConnectionFactory{
 				event.seteType(rs.getString("eType"));
 				event.seteDate(rs.getDate("eDate"));
 				event.setePeriod(rs.getInt("ePeriod"));
-				event.seteTime(rs.getInt("eTime"));
+				event.seteTime(rs.getDate("eTime"));
 				event.seteGoogleID(rs.getString("eGoogleID"));
 				
 				eventList.add(event);
@@ -107,7 +107,7 @@ public class EventDAO extends ConnectionFactory{
 			pstmt.setInt(12, event.geteTypeID());
 			pstmt.setDate(13, new Date(event.geteDate().getTime()));
 			pstmt.setInt(14, event.getePeriod());
-			pstmt.setInt(15, event.geteTime());
+			pstmt.setDate(15, new Date(event.geteTime().getTime()));
 			pstmt.setString(16, event.geteGoogleID());
 			
 			pstmt.executeUpdate();
@@ -153,7 +153,7 @@ public class EventDAO extends ConnectionFactory{
 			pstmt.setInt(12, event.geteTypeID());
 			pstmt.setDate(13, new Date(event.geteDate().getTime()));
 			pstmt.setInt(14, event.getePeriod());
-			pstmt.setInt(15, event.geteTime());
+			pstmt.setDate(15, new Date(event.geteTime().getTime()));
 			pstmt.setString(16, event.geteGoogleID());
 			pstmt.setInt(17, event.geteID());
 

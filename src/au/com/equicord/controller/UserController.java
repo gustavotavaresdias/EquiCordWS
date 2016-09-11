@@ -1,5 +1,6 @@
 package au.com.equicord.controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import au.com.equicord.dao.UserDAO;
@@ -17,8 +18,12 @@ public class UserController {
 		return UserDAO.getIntance().getUsers();
 	}
 
-	public User getUserByID(int idUser) {
+	public User getUserByID(int idUser) throws SQLException {
 		return UserDAO.getIntance().getUserById(idUser);
+	}
+	
+	public User getUserByEmail(String email) throws SQLException {
+		return UserDAO.getIntance().getUserByEmail(email);
 	}
 	
 	public int addUser(User user) {

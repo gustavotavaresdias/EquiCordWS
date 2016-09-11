@@ -19,6 +19,10 @@ public class User {
 	private int uPasscode;
 	private String uGoogleID;
 	private String uPassword;
+	private String uStreet;
+	private String uSuburb;
+	private String uTown;
+	private String uCountry;
 
 	public int getuID() {
 		return uID;
@@ -90,6 +94,38 @@ public class User {
 
 	public void setuPassword(String uPassword) {
 		this.uPassword = uPassword;
+	}
+
+	public String getuStreet() {
+		return uStreet;
+	}
+
+	public void setuStreet(String uStreet) {
+		this.uStreet = uStreet;
+	}
+
+	public String getuSuburb() {
+		return uSuburb;
+	}
+
+	public void setuSuburb(String uSuburb) {
+		this.uSuburb = uSuburb;
+	}
+
+	public String getuTown() {
+		return uTown;
+	}
+
+	public void setuTown(String uTown) {
+		this.uTown = uTown;
+	}
+
+	public String getuCountry() {
+		return uCountry;
+	}
+
+	public void setuCountry(String uCountry) {
+		this.uCountry = uCountry;
 	}
 
 }
