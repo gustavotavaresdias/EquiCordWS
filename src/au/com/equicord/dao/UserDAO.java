@@ -14,8 +14,8 @@ import au.com.equicord.model.User;
  * 
  * @author Gustavo <gustavotavaresdias@gmail.com>
  */
-public class UserDAO extends ConnectionFactory{
-	
+public class UserDAO extends ConnectionFactory {
+
 	private static UserDAO instance;
 
 	public static UserDAO getIntance() {
@@ -55,7 +55,7 @@ public class UserDAO extends ConnectionFactory{
 				user.setuPasscode(rs.getInt("uPasscode"));
 				user.setuGoogleID(rs.getString("uGoogleID"));
 				user.setuPassword(rs.getString("uPassword"));
-				
+
 				userList.add(user);
 			}
 		} catch (Exception e) {
@@ -67,37 +67,39 @@ public class UserDAO extends ConnectionFactory{
 
 		return userList;
 	}
-	
+
 	/**
 	 * Method responsible for getting an user by ID from DB
 	 * 
-	 * @param userID - User ID
+	 * @param userID
+	 *            - User ID
 	 * @return User - User
 	 */
 	public User getUserById(int userID) throws SQLException {
 		User user = null;
 
-		try (
-				Connection conn = createConnection();
-				PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM userTable where uID = ? Limit 1");
-			){
+		Connection conn = createConnection();
+		PreparedStatement pstmt = conn
+				.prepareStatement("SELECT * FROM userTable where uID = ? Limit 1");
+		ResultSet rs = null;
+		try {
 
 			pstmt.setInt(1, userID);
-
-			try (ResultSet rs = pstmt.executeQuery()) {
-				if (rs.next()) {
-					user = new User();
-					user.setuID(rs.getInt("uID"));
-					user.setuName(rs.getString("uName"));
-					user.setuPhone(rs.getInt("uPhone"));
-					user.setuAddress(rs.getString("uAddress"));
-					user.setuPostcode(rs.getInt("uPostcode"));
-					user.setuEmail(rs.getString("uEmail"));
-					user.setuPasscode(rs.getInt("uPasscode"));
-					user.setuGoogleID(rs.getString("uGoogleID"));
-					user.setuPassword(rs.getString("uPassword"));
-				}
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				user = new User();
+				user.setuID(rs.getInt("uID"));
+				user.setuName(rs.getString("uName"));
+				user.setuPhone(rs.getInt("uPhone"));
+				user.setuAddress(rs.getString("uAddress"));
+				user.setuPostcode(rs.getInt("uPostcode"));
+				user.setuEmail(rs.getString("uEmail"));
+				user.setuPasscode(rs.getInt("uPasscode"));
+				user.setuGoogleID(rs.getString("uGoogleID"));
+				user.setuPassword(rs.getString("uPassword"));
 			}
+		} finally {
+			closeConnection(conn, pstmt, rs);
 		}
 		return user;
 	}
@@ -105,41 +107,44 @@ public class UserDAO extends ConnectionFactory{
 	/**
 	 * Method responsible for getting an user by Email from DB
 	 * 
-	 * @param eamil - User email
+	 * @param eamil
+	 *            - User email
 	 * @return User - User
-	 */	
+	 */
 	public User getUserByEmail(String email) throws SQLException {
 		User user = null;
 
-		try (
-				Connection conn = createConnection();
-				PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM userTable where uEmail = ? Limit 1");
-			){
+		Connection conn = createConnection();
+		PreparedStatement pstmt = conn
+				.prepareStatement("SELECT * FROM userTable where uEmail = ? Limit 1");
+		ResultSet rs = null;
+		try {
 
 			pstmt.setString(1, email);
-
-			try (ResultSet rs = pstmt.executeQuery()) {
-				if (rs.next()) {
-					user = new User();
-					user.setuID(rs.getInt("uID"));
-					user.setuName(rs.getString("uName"));
-					user.setuPhone(rs.getInt("uPhone"));
-					user.setuAddress(rs.getString("uAddress"));
-					user.setuPostcode(rs.getInt("uPostcode"));
-					user.setuEmail(rs.getString("uEmail"));
-					user.setuPasscode(rs.getInt("uPasscode"));
-					user.setuGoogleID(rs.getString("uGoogleID"));
-					user.setuPassword(rs.getString("uPassword"));
-				}
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				user = new User();
+				user.setuID(rs.getInt("uID"));
+				user.setuName(rs.getString("uName"));
+				user.setuPhone(rs.getInt("uPhone"));
+				user.setuAddress(rs.getString("uAddress"));
+				user.setuPostcode(rs.getInt("uPostcode"));
+				user.setuEmail(rs.getString("uEmail"));
+				user.setuPasscode(rs.getInt("uPasscode"));
+				user.setuGoogleID(rs.getString("uGoogleID"));
+				user.setuPassword(rs.getString("uPassword"));
 			}
+		} finally {
+			closeConnection(conn, pstmt, rs);
 		}
 		return user;
 	}
-	
+
 	/**
 	 * Method responsible for add object User into the database
 	 * 
-	 * @param User - object user
+	 * @param User
+	 *            - object user
 	 * @return newUserId - new user id
 	 */
 	public int addUser(User user) {
@@ -152,9 +157,12 @@ public class UserDAO extends ConnectionFactory{
 		conn = createConnection();
 		try {
 			pstmt = conn.prepareStatement(sql, pstmt.RETURN_GENERATED_KEYS);
-			//INSERT INTO `userTable`(`uID`, `uName`, `uPhone`, `uAddress`, `uEmail`, `uPostcode`, `uPasscode`,
-			//		`uGoogleID`, `uPassword`, `uStreet`, `uSuburb`, `uTown`, `uCountry`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12],[value-13])
-			
+			// INSERT INTO `userTable`(`uID`, `uName`, `uPhone`, `uAddress`,
+			// `uEmail`, `uPostcode`, `uPasscode`,
+			// `uGoogleID`, `uPassword`, `uStreet`, `uSuburb`, `uTown`,
+			// `uCountry`) VALUES
+			// ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12],[value-13])
+
 			pstmt.setString(1, user.getuName());
 			pstmt.setInt(2, user.getuPhone());
 			pstmt.setString(3, user.getuAddress());
@@ -167,12 +175,12 @@ public class UserDAO extends ConnectionFactory{
 			pstmt.setString(10, user.getuSuburb());
 			pstmt.setString(11, user.getuTown());
 			pstmt.setString(12, user.getuCountry());
-			
+
 			pstmt.executeUpdate();
 			rs = pstmt.getGeneratedKeys();
 			if (rs.next()) {
 				returnId = rs.getInt(1);
-	        }
+			}
 			System.out.println("Added USER - " + user.toString());
 		} catch (Exception e) {
 			System.out.println("Error when try add new USER - " + e);
@@ -187,7 +195,8 @@ public class UserDAO extends ConnectionFactory{
 	/**
 	 * Method responsible for update object User into the database
 	 * 
-	 * @param User - object user
+	 * @param User
+	 *            - object user
 	 * @return boolean - true or false
 	 */
 	public boolean updateUser(User user) {
@@ -197,9 +206,10 @@ public class UserDAO extends ConnectionFactory{
 
 		conn = createConnection();
 		try {
-			pstmt = conn.prepareStatement("UPDATE userTable SET uName = ?, "
-					+ "uPhone = ?, uAddress = ?, uPostcode = ?, uEmail = ?, uPasscode = ?, uGoogleID = ?, uPassword = ? "
-					+ "WHERE uID = ?");
+			pstmt = conn
+					.prepareStatement("UPDATE userTable SET uName = ?, "
+							+ "uPhone = ?, uAddress = ?, uPostcode = ?, uEmail = ?, uPasscode = ?, uGoogleID = ?, uPassword = ? "
+							+ "WHERE uID = ?");
 
 			pstmt.setString(1, user.getuName());
 			pstmt.setInt(2, user.getuPhone());
@@ -211,7 +221,7 @@ public class UserDAO extends ConnectionFactory{
 			pstmt.setString(8, user.getuPassword());
 			pstmt.setInt(9, user.getuID());
 
-			pstmt.executeUpdate();			
+			pstmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("Error when try update USER - " + e);
 			e.printStackTrace();
@@ -235,10 +245,11 @@ public class UserDAO extends ConnectionFactory{
 
 		conn = createConnection();
 		try {
-			pstmt = conn.prepareStatement("DELETE FROM userTable WHERE uID = ?");
-			pstmt.setInt(1, idUser);			
+			pstmt = conn
+					.prepareStatement("DELETE FROM userTable WHERE uID = ?");
+			pstmt.setInt(1, idUser);
 			pstmt.executeUpdate();
-			
+
 		} catch (Exception e) {
 			System.out.println("Error when try delete USER - " + e);
 			e.printStackTrace();

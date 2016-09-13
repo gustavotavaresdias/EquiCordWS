@@ -1,5 +1,6 @@
 package au.com.equicord.model;
 
+import java.sql.Time;
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -30,6 +31,12 @@ public class Event {
 	private int ePeriod;
 	private Date eTime;
 	private String eGoogleID;
+	private int eSNumber;
+	private String eSName;
+	private String eSuburb;
+	private String eState;
+	private String eCountry;
+	private String ePicture;
 
 	public int geteID() {
 		return eID;
@@ -173,6 +180,58 @@ public class Event {
 
 	public void seteGoogleID(String eGoogleID) {
 		this.eGoogleID = eGoogleID;
+	}
+
+	public int geteSNumber() {
+		return eSNumber;
+	}
+
+	public void seteSNumber(int eSNumber) {
+		this.eSNumber = eSNumber;
+	}
+
+	public String geteSName() {
+		return eSName;
+	}
+
+	public void seteSName(String eSName) {
+		this.eSName = eSName;
+	}
+
+	public String geteSuburb() {
+		return eSuburb;
+	}
+
+	public void seteSuburb(String eSuburb) {
+		this.eSuburb = eSuburb;
+	}
+
+	public String geteState() {
+		return eState;
+	}
+
+	public void seteState(String eState) {
+		this.eState = eState;
+	}
+
+	public String geteCountry() {
+		return eCountry;
+	}
+
+	public void seteCountry(String eCountry) {
+		this.eCountry = eCountry;
+	}
+
+	public String getePicture() {
+		return ePicture;
+	}
+
+	public void setePicture(String ePicture) {
+		this.ePicture = ePicture;
+	}
+
+	public void seteTime(Time eTime) {
+		this.eTime = eTime;
 	}
 
 }

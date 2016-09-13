@@ -10,11 +10,8 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
-import au.com.equicord.controller.EventTypeController;
 import au.com.equicord.controller.UserController;
-import au.com.equicord.model.EventType;
 import au.com.equicord.model.User;
 
 /**
@@ -51,7 +48,9 @@ public class UserResource {
 	@Path("/getUser/{id}")
 	@Produces("application/json")
 	public User GetUserByID(@PathParam("id") int idUser) throws SQLException {
-		return new UserController().getUserByID(idUser);
+		User resultUser = new User();
+		resultUser = new UserController().getUserByID(idUser);
+		return resultUser;
 	}
 	
 	/**

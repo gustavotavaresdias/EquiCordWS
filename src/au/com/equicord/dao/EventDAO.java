@@ -3,6 +3,7 @@ package au.com.equicord.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.sql.Date;
 
@@ -64,7 +65,13 @@ public class EventDAO extends ConnectionFactory{
 				event.seteDate(rs.getDate("eDate"));
 				event.setePeriod(rs.getInt("ePeriod"));
 				event.seteTime(rs.getDate("eTime"));
-				event.seteGoogleID(rs.getString("eGoogleID"));
+				event.seteGoogleID(rs.getString("eGoogleID"));				
+				event.seteSNumber(rs.getInt("eSNumber"));
+				event.seteSName(rs.getString("eSName"));
+				event.seteSuburb(rs.getString("eSuburb"));
+				event.seteState(rs.getString("eState"));
+				event.seteCountry(rs.getString("eCountry"));
+				event.setePicture(rs.getString("ePicture"));
 				
 				eventList.add(event);
 			}
@@ -91,7 +98,7 @@ public class EventDAO extends ConnectionFactory{
 
 		conn = createConnection();
 		try {
-			pstmt = conn.prepareStatement("INSERT INTO eventsTable VALUES (null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			pstmt = conn.prepareStatement("INSERT INTO eventsTable VALUES (null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
 			pstmt.setString(1, event.geteName());
 			pstmt.setString(2, event.geteAddress());
@@ -108,7 +115,13 @@ public class EventDAO extends ConnectionFactory{
 			pstmt.setDate(13, new Date(event.geteDate().getTime()));
 			pstmt.setInt(14, event.getePeriod());
 			pstmt.setDate(15, new Date(event.geteTime().getTime()));
-			pstmt.setString(16, event.geteGoogleID());
+			pstmt.setString(16, event.geteGoogleID());			
+			pstmt.setInt(17, event.geteSNumber());
+			pstmt.setString(18, event.geteSName());
+			pstmt.setString(19, event.geteSuburb());
+			pstmt.setString(20, event.geteState());
+			pstmt.setString(21, event.geteCountry());
+			pstmt.setString(22, event.getePicture());
 			
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -136,7 +149,8 @@ public class EventDAO extends ConnectionFactory{
 		try {
 			pstmt = conn.prepareStatement("UPDATE eventsTable SET eName = ?, "
 					+ "aAddress = ?, ePostcode = ?, eWeb = ?, ePhone = ?, eMail = ?, ecName = ?, ecAddress = ?, ecPhone = ?, ecEmail = ?, "
-					+ "elsPrivate = ?, eTypeID = ?, eDate = ?, ePeriod = ?, eTime = ?, eGoogleID = ? "
+					+ "elsPrivate = ?, eTypeID = ?, eDate = ?, ePeriod = ?, eTime = ?, eGoogleID = ?, eSNumber = ?, eSName = ?, "
+					+ "eSuburb = ?, eState = ?, eCountry = ?, ePicture = ? "
 					+ "WHERE eID = ?");
 
 			pstmt.setString(1, event.geteName());
@@ -155,7 +169,13 @@ public class EventDAO extends ConnectionFactory{
 			pstmt.setInt(14, event.getePeriod());
 			pstmt.setDate(15, new Date(event.geteTime().getTime()));
 			pstmt.setString(16, event.geteGoogleID());
-			pstmt.setInt(17, event.geteID());
+			pstmt.setInt(17, event.geteSNumber());
+			pstmt.setString(18, event.geteSName());
+			pstmt.setString(19, event.geteSuburb());
+			pstmt.setString(20, event.geteState());
+			pstmt.setString(21, event.geteCountry());
+			pstmt.setString(22, event.getePicture());
+			pstmt.setInt(23, event.geteID());
 
 			pstmt.executeUpdate();			
 		} catch (Exception e) {
