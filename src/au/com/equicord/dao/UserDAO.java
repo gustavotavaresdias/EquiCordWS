@@ -143,8 +143,7 @@ public class UserDAO extends ConnectionFactory {
 	/**
 	 * Method responsible for add object User into the database
 	 * 
-	 * @param User
-	 *            - object user
+	 * @param User - new user
 	 * @return newUserId - new user id
 	 */
 	public int addUser(User user) {
@@ -157,11 +156,6 @@ public class UserDAO extends ConnectionFactory {
 		conn = createConnection();
 		try {
 			pstmt = conn.prepareStatement(sql, pstmt.RETURN_GENERATED_KEYS);
-			// INSERT INTO `userTable`(`uID`, `uName`, `uPhone`, `uAddress`,
-			// `uEmail`, `uPostcode`, `uPasscode`,
-			// `uGoogleID`, `uPassword`, `uStreet`, `uSuburb`, `uTown`,
-			// `uCountry`) VALUES
-			// ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12],[value-13])
 
 			pstmt.setString(1, user.getuName());
 			pstmt.setInt(2, user.getuPhone());
@@ -181,6 +175,7 @@ public class UserDAO extends ConnectionFactory {
 			if (rs.next()) {
 				returnId = rs.getInt(1);
 			}
+			user.setuID(returnId);
 			System.out.println("Added USER - " + user.toString());
 		} catch (Exception e) {
 			System.out.println("Error when try add new USER - " + e);

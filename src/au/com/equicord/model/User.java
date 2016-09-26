@@ -24,6 +24,19 @@ public class User {
 	private String uTown;
 	private String uCountry;
 
+	public User() {
+		this.uName = "";
+		this.uAddress = "";
+		this.uEmail = "";
+		this.uGoogleID = "";
+		this.uPassword = "";
+		this.uStreet = "";
+		this.uSuburb = "";
+		this.uTown = "";
+		this.uCountry = "";
+	}
+
+
 	public int getuID() {
 		return uID;
 	}
@@ -127,5 +140,17 @@ public class User {
 	public void setuCountry(String uCountry) {
 		this.uCountry = uCountry;
 	}
+
+	@Override
+	public String toString() {
+		return "User [uID=" + uID + ", uName=" + uName + ", uPhone=" + uPhone
+				+ ", uAddress=" + uAddress + ", uEmail=" + uEmail
+				+ ", uPostcode=" + uPostcode + ", uPasscode=" + uPasscode
+				+ ", uGoogleID=" + uGoogleID + ", uPassword=" + uPassword
+				+ ", uStreet=" + uStreet + ", uSuburb=" + uSuburb + ", uTown="
+				+ uTown + ", uCountry=" + uCountry + "]";
+	}
+	
+	
 
 }

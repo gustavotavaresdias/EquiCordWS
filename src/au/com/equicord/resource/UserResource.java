@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 
 import au.com.equicord.controller.UserController;
 import au.com.equicord.model.User;
+import au.com.equicord.util.BCrypt;
 
 /**
  * Class responsible for having the web service's access methods for user.
@@ -45,11 +46,11 @@ public class UserResource {
 	 * @return User
 	 */
 	@GET
-	@Path("/getUser/{id}")
+	@Path("/getUserById/{id}")
 	@Produces("application/json")
-	public User GetUserByID(@PathParam("id") int idUser) throws SQLException {
+	public User getUserById(@PathParam("id") int idUser) throws SQLException {
 		User resultUser = new User();
-		resultUser = new UserController().getUserByID(idUser);
+		resultUser = new UserController().getUserById(idUser);
 		return resultUser;
 	}
 	
@@ -63,26 +64,42 @@ public class UserResource {
 	@GET
 	@Path("/getUserByEmail/{email}")
 	@Produces("application/json")
-	public User GetUserByEmail(@PathParam("email")String email) throws SQLException {
+	public User getUserByEmail(@PathParam("email")String email) throws SQLException {
 		User resultUser = new User();
 		resultUser = new UserController().getUserByEmail(email);
 		return resultUser;
 	}
 	
 	/**
+	 * Method responsible for Check a user by Email and Password.
+	 *
+	 * @param String - User email
+	 * @param String - User password
+	 * @return User
+	 * @throws SQLException 
+	 */
+	@POST
+	@Path("/login")
+	@Produces("application/json")
+	public User checkLogin(User user) throws SQLException {
+		User resultUser = new User();		
+		resultUser = new UserController().checkLogin(user);
+		return resultUser;
+	}
+	/**
 	 * Method responsible for POST a user object.
 	 *
 	 * @param user object
 	 * @return new User ID - user Id
+	 * @throws SQLException 
 	 */
 	@POST
 	@Path("/addUser")
 	@Produces("application/json")
-	public String addUser(User user) {
-		String result;
-
-		result = String.valueOf(new UserController().addUser(user));		
-		return result;
+	public User addUser(User user) throws SQLException {
+		User resultUser = new User();
+		resultUser = new UserController().addUser(user);		
+		return resultUser;
 	}
 
 	/**

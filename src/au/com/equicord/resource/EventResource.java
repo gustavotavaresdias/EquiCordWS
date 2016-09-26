@@ -1,7 +1,10 @@
 package au.com.equicord.resource;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -9,11 +12,13 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import au.com.equicord.controller.ContactController;
 import au.com.equicord.controller.EventController;
 import au.com.equicord.model.Contact;
 import au.com.equicord.model.Event;
+import au.com.equicord.util.Util;
 
 /**
  * Class responsible for having the web service's access methods for Event.
@@ -98,5 +103,35 @@ public class EventResource {
 			return SUCCESS_RESULT;
 		}
 		return FAILURE_RESULT;
+	}
+	
+	/**
+	 * Method responsible for UPLOAD image for horse.
+	 *
+	 * @param int - Id of horse
+	 * @return String - (Success or Failure)
+	 * @throws IOException 
+	 */
+	@POST
+	@Path("/upload")
+	@Produces("application/json")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public String uploadFile(byte[] fileData) throws IOException {
+		String result;
+		String imageName;
+		String SERVER_UPLOAD_LOCATION_FOLDER = "commercialgraphics.com.au\\httpdocs\\uploads\\";
+		//String SERVER_UPLOAD_LOCATION_FOLDER = "dir:\\var\\www\\vhosts\\commercialgraphics.com.au\\httpdocs\\uploads\\";
+		
+		
+		Calendar tempDate = Calendar.getInstance();
+		imageName = "event_" + tempDate.getTimeInMillis() + ".jpg";
+		String filePath = SERVER_UPLOAD_LOCATION_FOLDER + imageName;
+		result = Util.saveImage(fileData, filePath);
+		
+		//String webAppPath2 = new File(".").getCanonicalPath();
+		String webAppPath = this.getClass().getProtectionDomain().getCodeSource().getLocation().toString();
+		
+		return result + "*****" + webAppPath + "*****" +filePath;
+
 	}
 }

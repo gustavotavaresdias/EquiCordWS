@@ -183,4 +183,53 @@ public class HorseDAO extends ConnectionFactory{
 		}
 		return true;
 	}
+	
+	/**
+	 * Method responsible for getting all horses by User from DB
+	 * 
+	 * @return ArrayList<Horse> - List of Horses
+	 */
+	public ArrayList<Horse> getHorsesByUser(int userId) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Horse> horseList = null;
+
+		conn = createConnection();
+		horseList = new ArrayList<Horse>();
+
+		try {
+			pstmt = conn.prepareStatement("SELECT * FROM horseTable where hID in (SELECT masterMapping.hID FROM masterMapping WHERe uID = ? and hID is not Null)");
+			pstmt.setInt(1, userId);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				Horse horse = new Horse();
+
+				horse.sethID(rs.getInt("hID"));
+				horse.sethName(rs.getString("hName"));
+				horse.sethNickname(rs.getString("hNickname"));
+				horse.sethDame(rs.getString("hDame"));
+				horse.sethSire(rs.getString("hSire"));
+				horse.sethBreed(rs.getString("hBreed"));
+				horse.sethColour(rs.getString("hColour"));
+				horse.sethDOB(rs.getDate("hDOB"));
+				horse.sethSex(rs.getString("hSex"));
+				horse.sethHeight(rs.getFloat("hHeight"));
+				horse.sethMarksScars(rs.getString("hMarksScars"));
+				horse.sethPicture(rs.getString("hPicture"));
+				horse.sethMicrochip(rs.getString("hMicrochip"));
+				horse.sethDietary(rs.getString("hDietary"));
+				
+				horseList.add(horse);
+			}
+		} catch (Exception e) {
+			System.out.println("Error when select HORSES BY USER:" + e);
+			e.printStackTrace();
+		} finally {
+			closeConnection(conn, pstmt, rs);
+		}
+
+		return horseList;
+	}
 }

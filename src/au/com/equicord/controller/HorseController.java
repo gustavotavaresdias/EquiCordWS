@@ -28,4 +28,8 @@ public class HorseController {
 	public boolean deleteHorse(int idHorse) {
 		return HorseDAO.getIntance().deleteHorse(idHorse);
 	}
+	
+	public ArrayList<Horse> getHorsesByUser(int idUser){
+		return HorseDAO.getIntance().getHorsesByUser(idUser);
+	}
 }
