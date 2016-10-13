@@ -139,10 +139,10 @@ public class HorseResource {
 	}
 	
 	/**
-	 * Method responsible for GET Horses by USER ID object.
+	 * Method responsible for get all Horses by USER ID.
 	 *
 	 * @param int - Id user
-	 * @return ArrayList<Horse> - List of Horses
+	 * @return ArrayList<Horse> - List of Horses by User
 	 */
 	@GET
 	@Path("/getHorsesByUser/{idUser}")
@@ -151,5 +151,26 @@ public class HorseResource {
 		ArrayList<Horse> result = new ArrayList<Horse>();
 		result = new HorseController().getHorsesByUser(idUser);
 		return result;
+	}
+	
+	/**
+	 * Method responsible for POST a horse object.
+	 *
+	 * @param horse
+	 *            object
+	 * @return String - (Success or Failure)
+	 */
+	@POST
+	@Path("/addHorseByUser")
+	@Produces("application/json")
+	public String addHorseByUser(Horse horse) {
+		boolean result;
+
+		result = new HorseController().addHorseByUser(horse);
+
+		if (result) {
+			return SUCCESS_RESULT;
+		}
+		return FAILURE_RESULT;
 	}
 }

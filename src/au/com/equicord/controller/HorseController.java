@@ -32,4 +32,8 @@ public class HorseController {
 	public ArrayList<Horse> getHorsesByUser(int idUser){
 		return HorseDAO.getIntance().getHorsesByUser(idUser);
 	}
+	
+	public boolean addHorseByUser(Horse horse) {
+		return HorseDAO.getIntance().addHorseByUser(horse);
+	}
 }

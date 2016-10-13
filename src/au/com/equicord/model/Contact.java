@@ -35,6 +35,7 @@ public class Contact {
 	private String cState;
 	private String cCountry;
 	private String cPicture;
+	private int uID;
 
 	public int getId() {
 		return id;
@@ -220,101 +221,26 @@ public class Contact {
 		this.cPicture = cPicture;
 	}
 
+	public int getuID() {
+		return uID;
+	}
+
+	public void setuID(int uID) {
+		this.uID = uID;
+	}
+	
 	@Override
 	public String toString() {
 		return "Contact [id=" + id + ", name=" + name + ", phone=" + phone
 				+ ", address=" + address + ", postcode=" + postcode
 				+ ", email=" + email + ", isPrivate=" + isPrivate
-				+ ", categoryId=" + categoryId + ", periodId=" + periodId
-				+ ", start=" + start + ", end=" + end + ", price=" + price
-				+ ", searchId=" + searchId + ", googleId=" + googleId
-				+ ", paypal=" + paypal + "]";
+				+ ", categoryId=" + categoryId + ", categoryType="
+				+ categoryType + ", categoryDescription=" + categoryDescription
+				+ ", periodId=" + periodId + ", start=" + start + ", end="
+				+ end + ", price=" + price + ", searchId=" + searchId
+				+ ", googleId=" + googleId + ", paypal=" + paypal
+				+ ", cSNumber=" + cSNumber + ", cSName=" + cSName
+				+ ", cSuburb=" + cSuburb + ", cState=" + cState + ", cCountry="
+				+ cCountry + ", cPicture=" + cPicture + ", uID=" + uID + "]";
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + categoryId;
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((end == null) ? 0 : end.hashCode());
-		result = prime * result
-				+ ((googleId == null) ? 0 : googleId.hashCode());
-		result = prime * result + id;
-		result = prime * result + (isPrivate ? 1231 : 1237);
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + (paypal ? 1231 : 1237);
-		result = prime * result + periodId;
-		result = prime * result + phone;
-		result = prime * result + postcode;
-		long temp;
-		temp = Double.doubleToLongBits(price);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + searchId;
-		result = prime * result + ((start == null) ? 0 : start.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Contact other = (Contact) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
-		if (categoryId != other.categoryId)
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (end == null) {
-			if (other.end != null)
-				return false;
-		} else if (!end.equals(other.end))
-			return false;
-		if (googleId == null) {
-			if (other.googleId != null)
-				return false;
-		} else if (!googleId.equals(other.googleId))
-			return false;
-		if (id != other.id)
-			return false;
-		if (isPrivate != other.isPrivate)
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (paypal != other.paypal)
-			return false;
-		if (periodId != other.periodId)
-			return false;
-		if (phone != other.phone)
-			return false;
-		if (postcode != other.postcode)
-			return false;
-		if (Double.doubleToLongBits(price) != Double
-				.doubleToLongBits(other.price))
-			return false;
-		if (searchId != other.searchId)
-			return false;
-		if (start == null) {
-			if (other.start != null)
-				return false;
-		} else if (!start.equals(other.start))
-			return false;
-		return true;
-	}
-
 }

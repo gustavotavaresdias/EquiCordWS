@@ -2,7 +2,9 @@ package au.com.equicord.controller;
 
 import java.util.ArrayList;
 
+import au.com.equicord.dao.ContactDAO;
 import au.com.equicord.dao.EventDAO;
+import au.com.equicord.model.Contact;
 import au.com.equicord.model.Event;
 
 
@@ -28,5 +30,13 @@ public class EventController {
 
 	public boolean deleteEvent(int idEvent) {
 		return EventDAO.getIntance().deleteEvent(idEvent);
+	}
+	
+	public ArrayList<Event> getEventsByUser(int idUser){
+		return EventDAO.getIntance().getEventsByUser(idUser);
+	}
+	
+	public boolean addEventByUser(Event event) {
+		return EventDAO.getIntance().addEventByUser(event);
 	}
 }

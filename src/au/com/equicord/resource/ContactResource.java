@@ -99,4 +99,39 @@ public class ContactResource {
 		}
 		return FAILURE_RESULT;
 	}
+	
+	/**
+	 * Method responsible for get all Contacts by USER ID.
+	 *
+	 * @param int - Id user
+	 * @return ArrayList<Contact> - List of Contact by User
+	 */
+	@GET
+	@Path("/getContactsByUser/{idUser}")
+	@Produces("application/json")
+	public ArrayList<Contact> getContactsByUser(@PathParam("idUser") int idUser) {
+		ArrayList<Contact> result = new ArrayList<Contact>();
+		result = new ContactController().getContactsByUser(idUser);
+		return result;
+	}
+	
+	/**
+	 * Method responsible for POST a contact object.
+	 *
+	 * @param contact object
+	 * @return String - (Success or Failure)
+	 */
+	@POST
+	@Path("/addContactByUser")
+	@Produces("application/json")
+	public String addContactByUser(Contact contact) {
+		boolean result;
+
+		result = new ContactController().addContactByUser(contact);
+
+		if (result) {
+			return SUCCESS_RESULT;
+		}
+		return FAILURE_RESULT;
+	}
 }

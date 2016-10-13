@@ -37,6 +37,7 @@ public class Event {
 	private String eState;
 	private String eCountry;
 	private String ePicture;
+	private int uID;
 
 	public int geteID() {
 		return eID;
@@ -234,4 +235,26 @@ public class Event {
 		this.eTime = eTime;
 	}
 
+	public int getuID() {
+		return uID;
+	}
+
+	public void setuID(int uID) {
+		this.uID = uID;
+	}
+
+	@Override
+	public String toString() {
+		return "Event [eID=" + eID + ", eName=" + eName + ", eAddress="
+				+ eAddress + ", ePostcode=" + ePostcode + ", eWeb=" + eWeb
+				+ ", ePhone=" + ePhone + ", eMail=" + eMail + ", ecName="
+				+ ecName + ", ecAddress=" + ecAddress + ", ecPhone=" + ecPhone
+				+ ", ecEmail=" + ecEmail + ", elsPrivate=" + elsPrivate
+				+ ", eTypeID=" + eTypeID + ", eType=" + eType + ", eDate="
+				+ eDate + ", ePeriod=" + ePeriod + ", eTime=" + eTime
+				+ ", eGoogleID=" + eGoogleID + ", eSNumber=" + eSNumber
+				+ ", eSName=" + eSName + ", eSuburb=" + eSuburb + ", eState="
+				+ eState + ", eCountry=" + eCountry + ", ePicture=" + ePicture
+				+ ", uID=" + uID + "]";
+	}
 }

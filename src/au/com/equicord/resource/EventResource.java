@@ -134,4 +134,39 @@ public class EventResource {
 		return result + "*****" + webAppPath + "*****" +filePath;
 
 	}
+	
+	/**
+	 * Method responsible for get all Events by USER ID.
+	 *
+	 * @param int - Id user
+	 * @return ArrayList<Event> - List of Event by User
+	 */
+	@GET
+	@Path("/getEventsByUser/{idUser}")
+	@Produces("application/json")
+	public ArrayList<Event> getEventsByUser(@PathParam("idUser") int idUser) {
+		ArrayList<Event> result = new ArrayList<Event>();
+		result = new EventController().getEventsByUser(idUser);
+		return result;
+	}
+	
+	/**
+	 * Method responsible for POST a Event object.
+	 *
+	 * @param event object
+	 * @return String - (Success or Failure)
+	 */
+	@POST
+	@Path("/addEventByUser")
+	@Produces("application/json")
+	public String addEventByUser(Event event) {
+		boolean result;
+
+		result = new EventController().addEventByUser(event);
+
+		if (result) {
+			return SUCCESS_RESULT;
+		}
+		return FAILURE_RESULT;
+	}
 }

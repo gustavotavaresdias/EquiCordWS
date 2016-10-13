@@ -187,7 +187,7 @@ public class HorseDAO extends ConnectionFactory{
 	/**
 	 * Method responsible for getting all horses by User from DB
 	 * 
-	 * @return ArrayList<Horse> - List of Horses
+	 * @return ArrayList<Horse> - List of Horses by User
 	 */
 	public ArrayList<Horse> getHorsesByUser(int userId) {
 		Connection conn = null;
@@ -199,7 +199,9 @@ public class HorseDAO extends ConnectionFactory{
 		horseList = new ArrayList<Horse>();
 
 		try {
-			pstmt = conn.prepareStatement("SELECT * FROM horseTable where hID in (SELECT masterMapping.hID FROM masterMapping WHERe uID = ? and hID is not Null)");
+			pstmt = conn.prepareStatement("SELECT * FROM horseTable where hID"
+					+ " in (SELECT masterMapping.hID FROM masterMapping "
+					+ "WHERE uID = ? AND hID IS NOT NULL)");
 			pstmt.setInt(1, userId);
 			rs = pstmt.executeQuery();
 
@@ -232,4 +234,93 @@ public class HorseDAO extends ConnectionFactory{
 
 		return horseList;
 	}
+	
+	/**
+	 * Method responsible for add object Horse by user into the database
+	 * 
+	 * @param Horse - object horse with user id
+	 * @return boolean - true or false
+	 */
+	public boolean addHorseByUser(Horse horse) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "INSERT INTO horseTable VALUES (null,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		int newHorseId = -1;
+		boolean mapResult = false;
+		
+		conn = createConnection();
+		try {
+			pstmt = conn.prepareStatement(sql, pstmt.RETURN_GENERATED_KEYS);
+
+			pstmt.setString(1, horse.gethName());
+			pstmt.setString(2, horse.gethNickname());
+			pstmt.setString(3, horse.gethDame());
+			pstmt.setString(4, horse.gethSire());
+			pstmt.setString(5, horse.gethBreed());
+			pstmt.setString(6, horse.gethColour());
+			pstmt.setDate(7, new Date(horse.gethDOB().getTime()));
+			pstmt.setString(8, horse.gethSex());
+			pstmt.setFloat(9, horse.gethHeight());
+			pstmt.setString(10, horse.gethMarksScars());
+			pstmt.setString(11, horse.gethPicture());
+			pstmt.setString(12, horse.gethMicrochip());
+			pstmt.setString(13, horse.gethDietary());
+			
+			pstmt.executeUpdate();
+			rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				newHorseId = rs.getInt(1);
+				System.out.println("Added - " + horse.toString());				
+				mapResult = addToMasterMapping(newHorseId, horse.getuID());
+			}			
+			
+		} catch (Exception e) {
+			closeConnection(conn, pstmt, rs);
+			System.out.println("Error when try add new HORSE - " + e);
+			e.printStackTrace();
+			return false;
+		} finally {
+			closeConnection(conn, pstmt, rs);
+		}
+		return mapResult;
+	}
+	
+	/**
+	 * Method responsible for add Horse ID and User ID to MasterMapping Table
+	 * 
+	 * @param horseId - horse Id
+	 * @param userId - user id
+	 * @return boolean - true or false
+	 */
+	private boolean addToMasterMapping(int horseId, int userId) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "INSERT INTO masterMapping VALUES (null,null,?,?,null)";
+		int returnId = -1;
+		
+		conn = createConnection();
+		try {
+			pstmt = conn.prepareStatement(sql, pstmt.RETURN_GENERATED_KEYS);
+
+			pstmt.setInt(1, horseId);
+			pstmt.setInt(2, userId);
+			
+			pstmt.executeUpdate();
+			rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				returnId = rs.getInt(1);
+			}
+			System.out.println("Added to MasterMapping - mapID:" + returnId + "horseId:"+ horseId + "userId:"+ userId);
+			closeConnection(conn, pstmt, rs);
+			return true;
+			
+		} catch (Exception e) {
+			System.out.println("Error when try add to MasterMapping - " + e);
+			e.printStackTrace();
+			closeConnection(conn, pstmt, rs);
+			return false;
+		}
+	}	
 }

@@ -26,6 +26,7 @@ public class Horse {
 	private String hPicture;
 	private String hMicrochip;
 	private String hDietary;
+	private int uID;
 
 	public int gethID() {
 		return hID;
@@ -137,6 +138,25 @@ public class Horse {
 
 	public void sethDietary(String hDietary) {
 		this.hDietary = hDietary;
+	}
+
+	public int getuID() {
+		return uID;
+	}
+
+	public void setuID(int uID) {
+		this.uID = uID;
+	}
+	
+	@Override
+	public String toString() {
+		return "Horse [hID=" + hID + ", hName=" + hName + ", hNickname="
+				+ hNickname + ", hDame=" + hDame + ", hSire=" + hSire
+				+ ", hBreed=" + hBreed + ", hColour=" + hColour + ", hDOB="
+				+ hDOB + ", hSex=" + hSex + ", hHeight=" + hHeight
+				+ ", hMarksScars=" + hMarksScars + ", hPicture=" + hPicture
+				+ ", hMicrochip=" + hMicrochip + ", hDietary=" + hDietary
+				+ ", uID=" + uID + "]";
 	}
 
 }
