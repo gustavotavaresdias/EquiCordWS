@@ -23,6 +23,9 @@ public class User {
 	private String uSuburb;
 	private String uTown;
 	private String uCountry;
+	private int uEmailConfirm;
+	private int uConfirmation;
+	
 
 	public User() {
 		this.uName = "";
@@ -141,15 +144,36 @@ public class User {
 		this.uCountry = uCountry;
 	}
 
+	public int getuEmailConfirm() {
+		return uEmailConfirm;
+	}
+
+
+	public void setuEmailConfirm(int uEmailConfirm) {
+		this.uEmailConfirm = uEmailConfirm;
+	}
+
+
+	public int getuConfirmation() {
+		return uConfirmation;
+	}
+
+
+	public void setuConfirmation(int uConfirmation) {
+		this.uConfirmation = uConfirmation;
+	}
+
+
 	@Override
 	public String toString() {
-		return "User [uID=" + uID + ", uName=" + uName + ", uPhone=" + uPhone
-				+ ", uAddress=" + uAddress + ", uEmail=" + uEmail
-				+ ", uPostcode=" + uPostcode + ", uPasscode=" + uPasscode
-				+ ", uGoogleID=" + uGoogleID + ", uPassword=" + uPassword
-				+ ", uStreet=" + uStreet + ", uSuburb=" + uSuburb + ", uTown="
-				+ uTown + ", uCountry=" + uCountry + "]";
+		return "User [uID=" + uID + ", uName=" + uName + ", uPhone=" + uPhone + ", uAddress=" + uAddress + ", uEmail="
+				+ uEmail + ", uPostcode=" + uPostcode + ", uPasscode=" + uPasscode + ", uGoogleID=" + uGoogleID
+				+ ", uPassword=" + uPassword + ", uStreet=" + uStreet + ", uSuburb=" + uSuburb + ", uTown=" + uTown
+				+ ", uCountry=" + uCountry + ", uEmailConfirm=" + uEmailConfirm + ", uConfirmation=" + uConfirmation +"]";
 	}
+
+
+	
 	
 	
 

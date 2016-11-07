@@ -56,7 +56,7 @@ public class ContactDAO extends ConnectionFactory {
 				contact.setAddress(rs.getString("cAddress"));
 				contact.setPostcode(rs.getInt("cPostcode"));
 				contact.setEmail(rs.getString("cEmail"));
-				contact.setPrivate(rs.getBoolean("clsPrivate"));
+				contact.setClsPrivate(rs.getBoolean("clsPrivate"));
 				contact.setCategoryId(rs.getInt("CategoryID"));
 				contact.setCategoryType(rs.getString("cType"));
 				contact.setCategoryDescription(rs.getString("cTypeDesc"));
@@ -106,7 +106,7 @@ public class ContactDAO extends ConnectionFactory {
 			pstmt.setString(3, contact.getAddress());
 			pstmt.setInt(4, contact.getPostcode());
 			pstmt.setString(5, contact.getEmail());
-			pstmt.setBoolean(6, contact.isPrivate());
+			pstmt.setBoolean(6, contact.isClsPrivate());
 			pstmt.setInt(7, contact.getCategoryId());
 			pstmt.setInt(8, contact.getPeriodId());
 			pstmt.setDate(9, new Date(contact.getStart().getTime()));
@@ -156,7 +156,7 @@ public class ContactDAO extends ConnectionFactory {
 			pstmt.setString(3, contact.getAddress());
 			pstmt.setInt(4, contact.getPostcode());
 			pstmt.setString(5, contact.getEmail());
-			pstmt.setBoolean(6, contact.isPrivate());
+			pstmt.setBoolean(6, contact.isClsPrivate());
 			pstmt.setInt(7, contact.getCategoryId());
 			pstmt.setInt(8, contact.getPeriodId());
 			pstmt.setDate(9, new Date(contact.getStart().getTime()));
@@ -239,7 +239,7 @@ public class ContactDAO extends ConnectionFactory {
 				contact.setAddress(rs.getString("cAddress"));
 				contact.setPostcode(rs.getInt("cPostcode"));
 				contact.setEmail(rs.getString("cEmail"));
-				contact.setPrivate(rs.getBoolean("clsPrivate"));
+				contact.setClsPrivate(rs.getBoolean("clsPrivate"));
 				contact.setCategoryId(rs.getInt("CategoryID"));
 				contact.setCategoryType(rs.getString("cType"));
 				contact.setCategoryDescription(rs.getString("cTypeDesc"));
@@ -291,7 +291,7 @@ public class ContactDAO extends ConnectionFactory {
 			pstmt.setString(3, contact.getAddress());
 			pstmt.setInt(4, contact.getPostcode());
 			pstmt.setString(5, contact.getEmail());
-			pstmt.setBoolean(6, contact.isPrivate());
+			pstmt.setBoolean(6, contact.isClsPrivate());
 			pstmt.setInt(7, contact.getCategoryId());
 			pstmt.setInt(8, contact.getPeriodId());
 			pstmt.setDate(9, new Date(contact.getStart().getTime()));
@@ -352,7 +352,7 @@ public class ContactDAO extends ConnectionFactory {
 			if (rs.next()) {
 				returnId = rs.getInt(1);
 			}
-			System.out.println("Added to MasterMapping - mapID:" + returnId + "contactId:"+ contactId + "userId:"+ userId);
+			System.out.println("Added to MasterMapping - mapID:" + returnId + " contactId:"+ contactId + " userId:"+ userId);
 			closeConnection(conn, pstmt, rs);
 			return true;
 			

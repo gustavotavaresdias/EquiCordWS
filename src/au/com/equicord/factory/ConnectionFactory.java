@@ -14,11 +14,11 @@ public class ConnectionFactory {
 
 	// Path for Database
 	private final String DRIVER = "com.mysql.jdbc.Driver";
-	/*LocalHost Connection
-	private final String URL = "jdbc:mysql://localhost:3306/equicord_base_crud";
-	private final String USER = "root";
-	private final String PASS = "root";
-	*/
+	/*LocalHost Connection*/
+//	private final String URL = "jdbc:mysql://localhost:3306/equicord_base_crud";
+//	private final String USER = "root";
+//	private final String PASS = "root";
+	
 	/*Web Server Connection*/
 	private final String URL = "jdbc:mysql://223.27.22.119:3306/equicord_base_crud";
 	private final String USER = "test_root";

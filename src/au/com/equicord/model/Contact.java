@@ -18,7 +18,7 @@ public class Contact {
 	private String address;
 	private int postcode;
 	private String email;
-	private boolean isPrivate;
+	private boolean clsPrivate;
 	private int categoryId;
 	private String categoryType;
 	private String categoryDescription;
@@ -85,12 +85,12 @@ public class Contact {
 		this.email = email;
 	}
 
-	public boolean isPrivate() {
-		return isPrivate;
+	public boolean isClsPrivate() {
+		return clsPrivate;
 	}
 
-	public void setPrivate(boolean isPrivate) {
-		this.isPrivate = isPrivate;
+	public void setClsPrivate(boolean clsPrivate) {
+		this.clsPrivate = clsPrivate;
 	}
 
 	public int getCategoryId() {
@@ -233,7 +233,7 @@ public class Contact {
 	public String toString() {
 		return "Contact [id=" + id + ", name=" + name + ", phone=" + phone
 				+ ", address=" + address + ", postcode=" + postcode
-				+ ", email=" + email + ", isPrivate=" + isPrivate
+				+ ", email=" + email + ", isPrivate=" + clsPrivate
 				+ ", categoryId=" + categoryId + ", categoryType="
 				+ categoryType + ", categoryDescription=" + categoryDescription
 				+ ", periodId=" + periodId + ", start=" + start + ", end="

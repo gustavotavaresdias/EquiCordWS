@@ -1,15 +1,14 @@
 package au.com.equicord.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.sql.Date;
 
 import au.com.equicord.factory.ConnectionFactory;
 import au.com.equicord.model.Event;
-import au.com.equicord.model.Horse;
 
 /**
  * Class responsible for having all database methods from EventsTable
@@ -263,7 +262,8 @@ public class EventDAO extends ConnectionFactory{
 				event.seteType(rs.getString("eType"));
 				event.seteDate(rs.getDate("eDate"));
 				event.setePeriod(rs.getInt("ePeriod"));
-				event.seteTime(rs.getDate("eTime"));
+				Timestamp time = rs.getTimestamp("eTime");
+				event.seteTime(new java.util.Date(time.getTime()));
 				event.seteGoogleID(rs.getString("eGoogleID"));				
 				event.seteSNumber(rs.getInt("eSNumber"));
 				event.seteSName(rs.getString("eSName"));

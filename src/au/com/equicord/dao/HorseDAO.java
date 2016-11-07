@@ -312,7 +312,7 @@ public class HorseDAO extends ConnectionFactory{
 			if (rs.next()) {
 				returnId = rs.getInt(1);
 			}
-			System.out.println("Added to MasterMapping - mapID:" + returnId + "horseId:"+ horseId + "userId:"+ userId);
+			System.out.println("Added to MasterMapping - mapID:" + returnId + " horseId:"+ horseId + " userId:"+ userId);
 			closeConnection(conn, pstmt, rs);
 			return true;
 			

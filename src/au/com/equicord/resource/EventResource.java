@@ -3,6 +3,7 @@ package au.com.equicord.resource;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -12,7 +13,11 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import com.sun.jersey.api.json.JSONConfiguration;
 
 import au.com.equicord.controller.ContactController;
 import au.com.equicord.controller.EventController;
@@ -139,15 +144,15 @@ public class EventResource {
 	 * Method responsible for get all Events by USER ID.
 	 *
 	 * @param int - Id user
-	 * @return ArrayList<Event> - List of Event by User
+	 * @return List<Event> - List of Event by User
 	 */
 	@GET
 	@Path("/getEventsByUser/{idUser}")
-	@Produces("application/json")
-	public ArrayList<Event> getEventsByUser(@PathParam("idUser") int idUser) {
-		ArrayList<Event> result = new ArrayList<Event>();
-		result = new EventController().getEventsByUser(idUser);
-		return result;
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getEventsByUser(@PathParam("idUser") int idUser) {
+		List<Event> result = new ArrayList<Event>();
+		result = new EventController().getEventsByUser(idUser);	        
+	    return Response.ok(result).build();
 	}
 	
 	/**

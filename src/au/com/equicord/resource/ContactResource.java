@@ -2,6 +2,7 @@ package au.com.equicord.resource;
 
 import java.util.ArrayList;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -11,9 +12,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import au.com.equicord.controller.ContactController;
-import au.com.equicord.controller.HorseController;
 import au.com.equicord.model.Contact;
-import au.com.equicord.model.Horse;
 
 /**
  * Class responsible for having the web service's access methods for contact.
@@ -124,6 +123,7 @@ public class ContactResource {
 	@POST
 	@Path("/addContactByUser")
 	@Produces("application/json")
+	@Consumes("application/json")
 	public String addContactByUser(Contact contact) {
 		boolean result;
 

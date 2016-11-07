@@ -156,8 +156,7 @@ public class HorseResource {
 	/**
 	 * Method responsible for POST a horse object.
 	 *
-	 * @param horse
-	 *            object
+	 * @param horse object
 	 * @return String - (Success or Failure)
 	 */
 	@POST

@@ -150,7 +150,7 @@ public class UserDAO extends ConnectionFactory {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "INSERT INTO userTable VALUES (null,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO userTable VALUES (null,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		int returnId = -1;
 
 		conn = createConnection();
@@ -169,6 +169,8 @@ public class UserDAO extends ConnectionFactory {
 			pstmt.setString(10, user.getuSuburb());
 			pstmt.setString(11, user.getuTown());
 			pstmt.setString(12, user.getuCountry());
+			pstmt.setInt(13, user.getuEmailConfirm());
+			pstmt.setInt(14, user.getuConfirmation());
 
 			pstmt.executeUpdate();
 			rs = pstmt.getGeneratedKeys();

@@ -1,6 +1,5 @@
 package au.com.equicord.model;
 
-import java.sql.Time;
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -229,10 +228,6 @@ public class Event {
 
 	public void setePicture(String ePicture) {
 		this.ePicture = ePicture;
-	}
-
-	public void seteTime(Time eTime) {
-		this.eTime = eTime;
 	}
 
 	public int getuID() {
